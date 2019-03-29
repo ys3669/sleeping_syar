@@ -61,6 +61,7 @@ public class NetUtil {
         Uri.Builder builder = uri.buildUpon();
         switch (host) {
             case "twitpic.com":
+                break;
             case "img.ly":
                 builder.authority(host);
                 builder.path("show/full".concat(uri.getPath()));
@@ -102,15 +103,19 @@ public class NetUtil {
         String path = uri.getPath();
         if (TextUtils.isEmpty(path)) return false;
         switch (uri.getHost()) {
-            case "twitpic.com":
-            case "img.ly":
-            case "gyazo.com":
-            case "p.twipple.jp":
+            /*
+            case "twitpic.com": //サービス終了
+            case "img.ly": //サービス終了
+            case "gyazo.com": //正常動作しなかったので応急処置(何故か2枚送信されてきたりする)
+            case "p.twipple.jp": //サービス終了
                 return true;
+            */
+            /* //Instagramの画像URL仕様変更により、正常動作しなかったので応急処置(CDN化)
             case "www.instagram.com":
             case "instagr.am":
                 List<String> segments = uri.getPathSegments();
                 return segments.get(0).equals("p");
+            */
             default:
                 return false;
         }
